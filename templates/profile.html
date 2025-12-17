@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="profile-container">
+    <div class="profile-card">
+        <div class="profile-header">
+            {% if user['profile_pic'] %}
+                <img src="{{ url_for('static', filename='profile_pic/' ~ session.get('profile_pic') or 'profile_icon.jpg') }}?t={{ g.ts }}" width="100">
+            {% else %}
+                <p>Henüz fotoğraf yüklenmedi.</p>
+            {% endif %}
+            <h2>{{ user.username }}</h2>
+        </div>
+
+        <div class="profile-info">
+            <form method="POST" enctype="multipart/form-data" action="{{ url_for('upload_profile_pic') }}">
+                <label>Email:</label>
+                <input type="email" name="email" value="{{ user.email or '' }}" required>
+
+                <label>Hakkında (Bio):</label>
+                <textarea name="bio" rows="4">{{ user.bio or '' }}</textarea>
+
+                <label>Profil Fotoğrafı Yükle:</label>
+                <input type="file" name="profile_pic" accept="image/*">
+                <button type="submit" class="update-btn">Bilgileri Güncelle</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

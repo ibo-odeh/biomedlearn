@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="community-section">
+    <h2>🌍 Topluluk Alanı</h2>
+    <p>Dünya genelinden biyomedikal alanında yapılan çalışmaları, projeleri ve ilham verici fikirleri keşfedin.</p>
+    
+    <div class="posts-container">
+        <div class="post">
+          <img src="{{ url_for('static', filename='images/biomedical_sensors.jpg') }}" alt="Biomedical Sensors" class="post-img">
+          <h3>Biomedical Sensors (MDPI)</h3>
+          <p>Biyomedikal sensörler üzerine güncel araştırmalar.</p>
+          <a href="https://www.mdpi.com/journal/sensors" target="_blank" class="btn">Projeye Git</a>
+        </div>
+
+        <div class="post">
+          <img src="{{ url_for('static', filename='images/physiokit_toolkit.jpg') }}" alt="PhysioKit Toolkit" class="post-img">
+          <h3>PhysioKit Toolkit (UCL)</h3>
+          <p>Fizyolojik sinyallerin ölçümü için açık kaynak toolkit.</p>
+          <a href="https://discovery.ucl.ac.uk/10178445/1/sensors-23-08244.pdf" target="_blank" class="btn">Makale</a>
+        </div>
+
+        <div class="post">
+          <img src="{{ url_for('static', filename='images/biosensing_research.jpg') }}" alt="BioSensing Research" class="post-img">
+          <h3>Sensing & Bio-Sensing Research</h3>
+          <p>Biyosensör teknolojileri üzerine bilimsel dergi.</p>
+          <a href="https://www.sciencedirect.com/journal/sensing-and-bio-sensing-research" target="_blank" class="btn">Siteye Git</a>
+        </div>
+
+        <div class="post">
+          <img src="{{ url_for('static', filename='images/bogazici_bme.jpg') }}" alt="Boğaziçi BME" class="post-img">
+          <h3>Boğaziçi BME Projeleri</h3>
+          <p>Boğaziçi Üniversitesi aktif biyomedikal araştırma projeleri.</p>
+          <a href="https://bme.bogazici.edu.tr/en/active-research-projects" target="_blank" class="btn">Projeleri Gör</a>
+        </div>
+
+        <div class="post">
+          <img src="{{ url_for('static', filename='images/openbci_project.jpg') }}" alt="OpenBCI EEG" class="post-img">
+          <h3>OpenBCI Project</h3>
+          <p>EEG tabanlı beyin dalgası analiz cihazı – açık kaynak proje.</p>
+          <a href="https://openbci.com/" target="_blank" class="btn">Projeye Git</a>
+        </div>
+ 
+        <div class="post">
+            <img src="{{ url_for('static', filename='images/tum_ai_heart.jpg') }}" alt="TUM AI Heart Disease" class="post-img">
+            <h3>TUM – AI ile Kalp Hastalıkları Analizi 🇩🇪</h3>
+            <p>TUM araştırmacıları yapay zekâ ve sensör verileriyle kalp hastalıklarının analizini geliştiriyor.</p>
+            <a href="https://www.tum.de/en/news-and-events/all-news/press-releases/details/mit-kuenstlicher-intelligenz-herzerkrankungen-besser-behandeln" target="_blank" class="btn">Detayları İncele</a>
+        </div>
+
+        <div class="post">
+            <img src="{{ url_for('static', filename='images/harvard_bci.jpg') }}" alt="Harvard BCI" class="post-img">
+            <h3>Harvard – Beyin-Bilgisayar Arayüzleri (BCI) 🇺🇸</h3>
+            <p>Harvard araştırmacıları sinir sinyallerinden bilgisayar kontrolüne geçişi mümkün kılan arayüzler geliştiriyor.</p>
+            <a href="https://magazine.hms.harvard.edu/articles/designing-brain-computer-interfaces-connect-neurons-digital-world" target="_blank" class="btn">Kaynağı Gör</a>
+        </div>
+
+      </div>
+    </div>
+  </body>
+  </html>
+      </div>
+{% endblock %}

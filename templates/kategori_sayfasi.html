@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="kategori-container">
+    <h1 class="kategori-baslik">{{ kategori | capitalize }} Dosyaları</h1>
+
+    <div class="proje-listesi">
+        {% if dosyalar %}
+            <ul>
+            {% for dosya in dosyalar %}
+                <li><a href="{{ url_for('static', filename='../uploads/' ~ kategori ~ '/' ~ dosya) }}" target="_blank">{{ dosya }}</a></li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>Henüz dosya eklenmemiş.</p>
+        {% endif %}
+    </div>
+    
+    {% if session.get('role') == 'admin' %}
+    <div class="dosya-yukleme-alani">
+    {% endif %}
+        <h3>Yeni Dosya Ekle</h3>
+        <form action="{{ url_for('proje_ekle', kategori=kategori) }}" method="post" enctype="multipart/form-data" class="dosya-formu">
+            <input type="file" name="dosya" required>
+            <button type="submit" class="yukle-btn">📁 Dosyayı Yükle</button>
+        </form>
+    {% if session.get('role') == 'admin' %}
+    </div>
+    {% endif %}
+</div>
+<style>
+.kategori-container {
+    max-width: 900px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.kategori-baslik {
+    color: #004aad;
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+
+.proje-listesi ul {
+    list-style: none;
+    padding: 0;
+}
+
+.proje-listesi li {
+    margin: 10px 0;
+}
+
+.dosya-yukleme-alani {
+    margin-top: 40px;
+    background: #f7f9fc;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px dashed #004aad;
+}
+
+.yukle-btn {
+    background: #004aad;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.yukle-btn:hover {
+    background: #0073ff;
+}
+</style>
+
+{% endblock %}

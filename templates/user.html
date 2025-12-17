@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Kullanıcı Sayfası</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+        <h1>Hoş geldiniz, {{ username }}!</h1>
+        <p>Bu biyomedikal kullanıcı panelidir.</p>
+
+        <div>
+            <img src="{{ url_for('static', filename='heart.png') }}" alt="Kalp" class="icon">
+            <img src="{{ url_for('static', filename='dna.png') }}" alt="DNA" class="icon">
+            <img src="{{ url_for('static', filename='biomedical.png') }}" alt="Biyomedikal" class="icon">
+        </div>
+  
+        <h2>Paylaşılan Dosyalar</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Dosya Adı</th>
+                    <th>Yükleyen</th>
+                    <th>Tarih</th>
+                    <th>Açıklama</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for file in uploaded_files %}
+                <tr>
+                    <td>{{ file['filename'] }}</td>
+                    <td>{{ file['uploaded_by'] }}</td>
+                    <td>{{ file['upload_date'] }}</td>
+                    <td>{{ file['description'] }}</td>
+                    <td>
+                        <a href="{{ url_for('upload1_file', filename=file['filename']) }}" target="_blank">İndir/Görüntüle</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+

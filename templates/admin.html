@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Yönetici Paneli</h2>
+
+<section class="admin-section">
+    <h3>Ders Listesi</h3>
+    <ul>
+        {% for d in dersler %}
+        <li>
+            <strong>{{ d.baslik }}</strong>
+            <a href="/delete_ders/{{ d.id }}">Sil</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h3>Yeni Dosya Yükle</h3>
+    </form>
+    <form action="{{ url_for('upload2_file') }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="text" name="description" placeholder="Açıklama">
+        <button type="submit">Yükle</button>
+    </form>
+
+    <h3>Yüklü Dosyalar</h3>
+    <table class="file_table">
+        <thead>
+            <tr>
+                <th>Dosya Adı</th>
+                <th>Boyut</th>
+                <th class="İşlemler">İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for file in upload_files %}
+            <tr>
+                <td>{{ file.name }}</td>
+                <td>{{ file.size }}</td>
+                <td class="islemler">
+                    <a href="#" class="buton">Görüntüle</a>
+                    <a href="#" class="buton">Düzenle</a>
+                    <a href="#" class="buton">Sil</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

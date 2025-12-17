@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="container">
+    <div class="welcome-container">
+        <h2>BioMedLearn'e Hoş Geldiniz</h2>
+        <p>
+            Bu portal, biyomedikal mühendisliği öğrencileri için hazırlanmıştır.  
+            Ders notları, projeler, cihaz şemaları ve deney şablonlarına kolayca erişebilirsiniz.
+        </p>
+    </div>
+ 
+    <div class="hero-image">
+        <img src="{{ url_for('static', filename='biomedical.png') }}" alt="Biyomedikal">
+        <img src="{{ url_for('static', filename='heart.png') }}" alt="Kalp Sensörü">
+        <img src="{{ url_for('static', filename='dna.png') }}" alt="DNA Yapısı">
+    </div>
+</section>
+
+<div class="features">
+  <div class="feature-card" onclick="window.location.href='{{ url_for('ders_notları') }}'">
+      <h3>Ders Notları</h3>
+      <p>Üniversiteye ait PDF notlarını inceleyin.</p>
+  </div>
+
+  <div class="feature-card" onclick="window.location.href='{{ url_for('projeler') }}'">
+      <h3>Proje Şablonları</h3>
+      <p>Biyomedikal devre ve cihaz örnekleri.</p>
+  </div>
+
+  {% if role == 'admin' %}
+  <div class="feature-card" onclick="window.location.href='{{ url_for('admin') }}'">
+      <h3>Yönetici Alanı</h3>
+      <p>Yeni dosyalar ve içerikler yükleyin.</p>
+  </div>
+  {% else %}
+  <div class="feature-card" onclick="window.location.href='{{ url_for('topluluk') }}'">
+          <h3>Topluluk Alanı</h3>
+          <p>Dünya genelinden biyomedikal alanında yapılan çalışmaları, projeleri ve ilham verici fikirleri keşfedin.</p>
+      </a>
+  </div>
+  {% endif %}
+</div>
+<div class="white-space"></div>
+
+<section class="video-banner">
+    <div class="overlay"></div>
+    <div class="video-wrapper">
+        <h2>Biyomedikal Mühendisliğe Genel Bakış</h2>
+        <iframe 
+            src="https://www.youtube.com/embed/sKGIdJeZFew" 
+            title="Biomedical Engineering Introduction"
+            frameborder="0" 
+            allowfullscreen>
+        </iframe>
+        <p class="video-caption">Kaynak: ALZUBE Biomedical Engineering Academy</p>
+    </div>
+</section>
+{% endblock %}

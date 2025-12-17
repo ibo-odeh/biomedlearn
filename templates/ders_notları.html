@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<div class="ders-notlari-sayfa">
+    <h2>Ders Notları</h2>
+  <meta charset="UTF-8">
+  <title>Ders Notları</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+      table {
+        width: 80%;
+        margin: 40px auto;
+        border-collapse: collapse;
+        background-color: #f9fbff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      }
+       th, td {
+      padding: 14px;
+      text-align: center;
+      border-bottom: 1px solid #e2e8f0;
+      }
+      th {
+       background-color: #007bff;
+       color: white;
+      }
+      a.button {
+       padding: 6px 10px;
+       background-color: #00b7ff;
+       color: white;
+       border-radius: 6px;
+       text-decoration: none;
+      }
+      a.button:hover {
+       background-color: #008fd6;
+      }
+     </style>
+    </head>
+    <body>
+     <h2 style="text-align:center; color:#003366;">Yönetici Tarafından Yüklenen Dosyalar</h2>
+
+   <table border="1">
+    <thead>
+        <tr>
+            <th>Dosya Adı</th>
+            <th>Yükleyen</th>
+            <th>Tarih</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for file in files %}
+        <tr>
+            <td>{{ file.name }}</td>
+            <td>{{ file.type }}</td>
+            <td>{{ file.size }}</td>
+        <td>
+                <a href="{{ url_for('upload1_file', filename=file.name) }}" target="_blank">İndir</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

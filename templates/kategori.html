@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2>{{ kategori }} Dosyaları</h2>
+
+    {% if 'role' in session and session['role'] == 'admin' %}
+    <form method="POST" enctype="multipart/form-data" class="upload-form">
+        <label>Yeni Dosya Ekle:</label>
+        <input type="file" name="file" required>
+        <button type="submit" class="upload-btn">Yükle</button>
+    </form>
+    {% endif %}
+<table class="dosya-tablosu">
+  <thead>
+    <tr>
+      <th>Dosya Adı</th>
+      <th>Boyut</th>
+      <th>İşlemler</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for dosya in dosyalar %}
+      <tr>
+        <td>{{ dosya.isim }}</td>
+        <td>{{ dosya.boyut }}</td>
+        <td>
+          <a href="{{ url_for('indir_dosya', kategori=kategori, filename=dosya.isim) }}" class="indir-btn">İndir</a>
+          {% if session.get('role') == 'admin' %}
+            <a href="{{ url_for('sil_dosya', kategori=kategori, filename=dosya.isim) }}" class="sil-btn">Sil</a>
+          {% endif %}
+        </td>
+      </tr>
+    {% else %}
+        <li>Henüz dosya eklenmemiş.</li>
+    {% endfor %}
+  </tbody>
+</table>    
+{% endblock %}

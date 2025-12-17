@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biyomedikal Mühendisliği Portalı</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<!-- 🌐 Biyomedikal Efekt Alanları -->
+    <div class="bio-effect left">
+        <div class="pulse-left top"></div>
+        <div class="pulse-left bottom"></div>
+    </div>
+
+    <div class="bio-effect right">
+        <div class="pulse-right top"></div>
+        <div class="pulse-right bottom"></div>
+    </div>
+    
+
+    <header class="site-header">
+        <div class="logo-nav">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+            <h1>Biyomedikal Mühendisliği Portalı</h1>
+            <nav class="menu">
+                <a href="{{ url_for('index') }}">Ana Sayfa</a>
+                <a href="{{ url_for('login') }}">Giriş</a>
+                <a href="{{ url_for('register') }}">Kayıt</a>
+                <a href="{{ url_for('hakkında') }}">Hakkında</a>
+                <a href="{{ url_for('iletişim') }}">İletişim</a>
+            </nav>
+
+            {% if session.get('username') %}
+            <div class="user-controls">
+              <a href="{{ url_for('profile') }}" class="profile-link-bg">
+                <img id="nav-profile-img" 
+                     src="{{ url_for('static', filename='profile_pic/' + (session.get('profile_pic') or 'profile_icon.jpg')) }}?t={{ g.ts }}"    
+                     alt="Profil" />
+              </a>
+              <a href="{{ url_for('logout') }}" class="logout-link">Çıkış</a>
+            </div>
+            {% endif %}
+        </div>
+    </header>
+
+    
+
+    <!-- Arka plan sembolleri veya görseller varsa burada -->
+
+    <main class="site-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% if request.endpoint != 'index' %}
+    <div class="geri-alt-container">
+        <button onclick="window.history.back()" class="geri-btn-alt">← Geri</button>
+    </div>
+    {% endif %}
+
+    <footer class="site-footer">
+        <p>&copy; 2025 BioMedLearn | Tüm hakları saklıdır.</p>
+    </footer>
+
+<div class="dna-wrapper left-dna">
+  <div class="dna-line">
+    {% for i in range(30) %}
+    <div class="base-pair" style="--i: {{ i }}"></div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="dna-wrapper right-dna">
+  <div class="dna-line">
+    {% for i in range(30) %}
+    <div class="base-pair" style="--i: {{ i }}"></div>
+    {% endfor %}
+  </div>
+</div>
+    
+</body>
+</html>

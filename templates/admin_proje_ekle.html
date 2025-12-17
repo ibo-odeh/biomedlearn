@@ -1,0 +1,13 @@
+<form action="/admin/proje_ekle" method="POST" enctype="multipart/form-data">
+  <label>Kategori:</label>
+  <select name="kategori">
+    <option value="arduino">Arduino</option>
+    <option value="altium">Altium</option>
+    <option value="biyomedikal">Biyomedikal</option>
+  </select>
+  <br><br>
+  <label>Dosya Yükle:</label>
+  <input type="file" name="dosya" required>
+  <br><br>
+  <button type="submit">Yükle</button>
+</form>

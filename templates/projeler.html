@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2 class="sayfa-baslik">Proje Şablonları</h2>
+    <div class="proje-grid">
+        <div class="proje-kart">
+            <img src="{{ url_for('static', filename='img/arduino.png') }}" alt="Arduino Projeleri">
+            <h3>Arduino Projeleri</h3>
+            <a href="{{ url_for('kategori_sayfasi', kategori='Arduino') }}" class="proje-btn">Projeleri Gör</a>
+        </div>
+        <div class="proje-kart">
+            <img src="{{ url_for('static', filename='img/altium.png') }}" alt="Altium Devreleri">
+            <h3>Altium Devreleri</h3>
+            <a href="{{ url_for('kategori_sayfasi', kategori='Altium') }}" class="proje-btn">Projeleri Gör</a>
+        </div>
+        <div class="proje-kart">
+            <img src="{{ url_for('static', filename='img/matlab.jpg') }}" alt="Matlab">
+            <h3>MATLAB Projeleri</h3>
+            <a href="{{ url_for('kategori_sayfasi', kategori='Matlab') }}" class="proje-btn">Projeleri Gör</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
