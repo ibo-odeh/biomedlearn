@@ -36,9 +36,13 @@
                 <td>{{ file.name }}</td>
                 <td>{{ file.size }}</td>
                 <td class="islemler">
-                    <a href="#" class="buton">Görüntüle</a>
-                    <a href="#" class="buton">Düzenle</a>
-                    <a href="#" class="buton">Sil</a>
+                    <a href="{{ url_for('view_file', filename=file.name) }}" class="buton">Görüntüle</a>
+                    <a href="{{ url_for('edit_file', filename=file.name) }}" class="buton">Düzenle</a>
+                    <a href="{{ url_for('delete_file', filename=file.name) }}"
+                       class="buton"
+                       onclick="return confirm('Silmek istediğine emin misin?');">
+                       Sil
+                    </a>
                 </td>
             </tr>
             {% endfor %}
