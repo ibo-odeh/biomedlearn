@@ -26,7 +26,7 @@
         <td>
           <a href="{{ url_for('indir_dosya', kategori=kategori, filename=dosya.isim) }}" class="indir-btn">İndir</a>
           {% if session.get('role') == 'admin' %}
-            <a href="{{ url_for('sil_dosya', kategori=kategori, filename=dosya.isim) }}" class="sil-btn">Sil</a>
+            <a href="{{ url_for('sil_dosya', kategori=kategori, filename=dosya.isim) }}" class="sil-btn" onclick="return confirm('Silmek istediğine emin misin?');">Sil</a>
           {% endif %}
         </td>
       </tr>
