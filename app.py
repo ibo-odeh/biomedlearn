@@ -294,7 +294,7 @@ def projeler():
 
     arduino_files = os.listdir(os.path.join(UPLOAD_FOLDER, "arduino"))
     altium_files = os.listdir(os.path.join(UPLOAD_FOLDER, "altium"))
-    bio_files = os.listdir(os.path.join(UPLOAD_FOLDER, "Matlab"))
+    bio_files = os.listdir(os.path.join(UPLOAD_FOLDER, "biyomedikal"))
     return render_template("projeler.html",
                            arduino=arduino_files,
                            altium=altium_files,
