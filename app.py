@@ -294,16 +294,16 @@ def projeler():
 
     arduino_files = os.listdir(os.path.join(UPLOAD_FOLDER, "arduino"))
     altium_files = os.listdir(os.path.join(UPLOAD_FOLDER, "altium"))
-    bio_files = os.listdir(os.path.join(UPLOAD_FOLDER, "biyomedikal"))
+    bio_files = os.listdir(os.path.join(UPLOAD_FOLDER, "Matlab"))
     return render_template("projeler.html",
                            arduino=arduino_files,
                            altium=altium_files,
-                           biyomedikal=bio_files)
+                           Matlab=bio_files)
 
 
 @app.route('/projeler/<kategori>', methods=['GET', 'POST'])
 def kategori_sayfasi(kategori):
-    kategori_klasoru = os.path.join('uploads', kategori)
+    kategori_klasoru = os.path.join(UPLOAD_FOLDER, kategori)
     os.makedirs(kategori_klasoru, exist_ok=True)
 
     if request.method == 'POST' and 'role' in session and session['role'] == 'admin':
