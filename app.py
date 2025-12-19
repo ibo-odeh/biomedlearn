@@ -292,8 +292,8 @@ def projeler():
     if 'username' not in session:
         return redirect(url_for('login'))
 
-    arduino_files = os.listdir(os.path.join(UPLOAD_FOLDER, "arduino"))
-    altium_files = os.listdir(os.path.join(UPLOAD_FOLDER, "altium"))
+    arduino_files = os.listdir(os.path.join(UPLOAD_FOLDER, "Arduino"))
+    altium_files = os.listdir(os.path.join(UPLOAD_FOLDER, "Altium"))
     bio_files = os.listdir(os.path.join(UPLOAD_FOLDER, "Matlab"))
     return render_template("projeler.html",
                            arduino=arduino_files,
