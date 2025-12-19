@@ -186,7 +186,10 @@ def admin():
 @app.route('/uploads/<path:filename>')
 def upload1_file(filename):
     return send_from_directory('static/uploads', filename)
-
+# === Dosya görüntüle ===
+@app.route("/view_file/<filename>")
+def view_file(filename):
+    return send_from_directory("static/uploads", filename)
 # === Ders Silme ===
 @app.route('/delete_file/<filename>')
 def delete_file(filename):
