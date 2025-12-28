@@ -328,12 +328,12 @@ def kategori_sayfasi(kategori):
 
 @app.route('/indir/<kategori>/<filename>')
 def indir_dosya(kategori, filename):
-    return send_from_directory(os.path.join('uploads', kategori), filename, as_attachment=True)
+    return send_from_directory(os.path.join('static','uploads', kategori), filename, as_attachment=True)
 
 @app.route('/sil/<kategori>/<filename>')
 def sil_dosya(kategori, filename):
     if 'role' in session and session['role'] == 'admin':
-        path = os.path.join('uploads', kategori, filename)
+        path = os.path.join('static','uploads', kategori, filename)
         if os.path.exists(path):
             os.remove(path)
             flash('Dosya silindi!', 'success')
