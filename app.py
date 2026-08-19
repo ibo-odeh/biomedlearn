@@ -50,6 +50,13 @@ def init_db():
 
 init_db()
 
+# === Google Site Haritası (Statik Klasör Yönlendirmesi) ===
+@app.route('/sitemap.xml')
+def sitemap():
+    # Dosyayı yasal olan 'static' klasörünün içinden çeker
+    response = make_response(send_from_directory(os.path.join(app.root_path, 'static'), 'sitemap.xml'))
+    response.headers['Content-Type'] = 'application/xml' # Tarayıcıya bunun XML olduğunu zorla söyler
+    return response
 
 import time
 
@@ -67,14 +74,6 @@ def index():
         return render_template('index.html', username=session['username'], role=session['role'], uploaded_files=uploaded_files)
     else:
         return render_template('index.html', role=None, uploaded_files=uploaded_files)
-
-# === Google Site Haritası (Kesin Çözüm) ===
-@app.route('/sitemap.xml')
-def sitemap():
-    # sitemap.xml dosyasını direkt ana dizinden (app.root_path) çeker
-    response = make_response(send_from_directory(app.root_path, 'sitemap.xml'))
-    response.headers['Content-Type'] = 'application/xml' # Tarayıcıya bunun bir XML olduğunu zorla söyler
-    return response
 
 # === Kayıt ===
 @app.route('/register', methods=['GET', 'POST'])
