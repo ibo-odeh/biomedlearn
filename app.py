@@ -484,3 +484,11 @@ if __name__ == '__main__':
     if not os.path.exists('uploads'):
         os.makedirs('uploads')
     app.run(debug=True)
+
+
+# === Google Site Haritası (Resmi Flask Standardı) ===
+@app.route('/sitemap.xml')
+def serve_sitemap():
+    # Dosyayı direkt ana dizinden (app.root_path) çekip güvenle sunar
+    return send_from_directory(app.root_path, 'sitemap.xml', mimetype='text/xml')
+
