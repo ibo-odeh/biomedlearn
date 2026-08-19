@@ -486,9 +486,18 @@ if __name__ == '__main__':
     app.run(debug=True)
 
 
-# === Google Site Haritası (Resmi Flask Standardı) ===
+# === Google Site Haritası (Sanal Üretim - Kesin Çözüm) ===
 @app.route('/sitemap.xml')
-def serve_sitemap():
-    # Dosyayı direkt ana dizinden (app.root_path) çekip güvenle sunar
-    return send_from_directory(app.root_path, 'sitemap.xml', mimetype='text/xml')
+def sitemap_sanal():
+    # Fiziksel dosyaya gerek yok, XML içeriğini kodun içinde canlı üretiyoruz
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://sitemaps.org">
+  <url>
+    <loc>https://biomedlearn.com.tr</loc>
+    <priority>1.00</priority>
+  </url>
+</urlset>"""
+    response = make_response(xml_content)
+    response.headers['Content-Type'] = 'application/xml'
+    return response
 
