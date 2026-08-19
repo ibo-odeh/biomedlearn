@@ -50,14 +50,6 @@ def init_db():
 
 init_db()
 
-# === Google Site Haritası (Statik Klasör Yönlendirmesi) ===
-@app.route('/sitemap.xml')
-def sitemap():
-    # Dosyayı yasal olan 'static' klasörünün içinden çeker
-    response = make_response(send_from_directory(os.path.join(app.root_path, 'static'), 'sitemap.xml'))
-    response.headers['Content-Type'] = 'application/xml' # Tarayıcıya bunun XML olduğunu zorla söyler
-    return response
-
 import time
 
 @app.before_request
@@ -67,13 +59,21 @@ def add_timestamp():
 # === Giriş Sayfası ===
 @app.route('/')
 def index():
-    upload_dir = os.path.join(app.root_path, 'static', 'uploads') # Klasör yolunu güncelledik
-    uploaded_files = os.listdir(upload_dir) if os.path.exists(upload_dir) else []
-    
     if 'username' in session:
-        return render_template('index.html', username=session['username'], role=session['role'], uploaded_files=uploaded_files)
+        return render_template('index.html', username=session['username'], role=session['role'])
     else:
-        return render_template('index.html', role=None, uploaded_files=uploaded_files)
+        return render_template('index.html', role=None)
+
+
+    upload_dir = os.path.join(app.root_path, 'uploads')
+    if not os.path.exists(upload_dir):
+        os.makedirs(upload_dir)
+    uploaded_files = os.listdir(upload_dir)
+
+    return render_template('index.html',
+                           username=session.get('username'),
+                           role=session.get('role'),
+                           uploaded_files=uploaded_files)
 
 # === Kayıt ===
 @app.route('/register', methods=['GET', 'POST'])
