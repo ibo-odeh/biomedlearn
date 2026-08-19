@@ -50,10 +50,6 @@ def init_db():
 
 init_db()
 
-# === Site Haritası (Google İçin) ===
-@app.route('/sitemap.xml')
-def sitemap():
-    return send_from_directory(app.root_path, 'sitemap.xml', mimetype='text/xml')
 
 import time
 
@@ -64,23 +60,21 @@ def add_timestamp():
 # === Giriş Sayfası ===
 @app.route('/')
 def index():
+    upload_dir = os.path.join(app.root_path, 'static', 'uploads') # Klasör yolunu güncelledik
+    uploaded_files = os.listdir(upload_dir) if os.path.exists(upload_dir) else []
+    
     if 'username' in session:
-        return render_template('index.html', username=session['username'], role=session['role'])
+        return render_template('index.html', username=session['username'], role=session['role'], uploaded_files=uploaded_files)
     else:
-        return render_template('index.html', role=None)
+        return render_template('index.html', role=None, uploaded_files=uploaded_files)
 
-
-    upload_dir = os.path.join(app.root_path, 'uploads')
-    if not os.path.exists(upload_dir):
-        os.makedirs(upload_dir)
-    uploaded_files = os.listdir(upload_dir)
-
-    return render_template('index.html',
-                           username=session.get('username'),
-                           role=session.get('role'),
-                           uploaded_files=uploaded_files)
-
-
+# === Google Site Haritası (Kesin Çözüm) ===
+@app.route('/sitemap.xml')
+def sitemap():
+    # sitemap.xml dosyasını direkt ana dizinden (app.root_path) çeker
+    response = make_response(send_from_directory(app.root_path, 'sitemap.xml'))
+    response.headers['Content-Type'] = 'application/xml' # Tarayıcıya bunun bir XML olduğunu zorla söyler
+    return response
 
 # === Kayıt ===
 @app.route('/register', methods=['GET', 'POST'])
