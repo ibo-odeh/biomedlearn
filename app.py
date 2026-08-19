@@ -50,6 +50,10 @@ def init_db():
 
 init_db()
 
+# === Site Haritası (Google İçin) ===
+@app.route('/sitemap.xml')
+def sitemap():
+    return send_from_directory(app.root_path, 'sitemap.xml', mimetype='text/xml')
 
 import time
 
@@ -186,10 +190,12 @@ def admin():
 @app.route('/uploads/<path:filename>')
 def upload1_file(filename):
     return send_from_directory('static/uploads', filename)
+
 # === Dosya görüntüle ===
 @app.route("/view_file/<filename>")
 def view_file(filename):
     return send_from_directory("static/uploads", filename)
+
 # === Ders Silme ===
 @app.route('/delete_file/<filename>')
 def delete_file(filename):
@@ -294,16 +300,16 @@ def projeler():
 
     arduino_files = os.listdir(os.path.join(UPLOAD_FOLDER, "arduino"))
     altium_files = os.listdir(os.path.join(UPLOAD_FOLDER, "altium"))
-    bio_files = os.listdir(os.path.join(UPLOAD_FOLDER, "Matlab"))
+    bio_files = os.listdir(os.path.join(UPLOAD_FOLDER, "biyomedikal"))
     return render_template("projeler.html",
                            arduino=arduino_files,
                            altium=altium_files,
-                           Matlab=bio_files)
+                           biyomedikal=bio_files)
 
 
 @app.route('/projeler/<kategori>', methods=['GET', 'POST'])
 def kategori_sayfasi(kategori):
-    kategori_klasoru = os.path.join(UPLOAD_FOLDER, kategori)
+    kategori_klasoru = os.path.join('uploads', kategori)
     os.makedirs(kategori_klasoru, exist_ok=True)
 
     if request.method == 'POST' and 'role' in session and session['role'] == 'admin':
@@ -328,12 +334,12 @@ def kategori_sayfasi(kategori):
 
 @app.route('/indir/<kategori>/<filename>')
 def indir_dosya(kategori, filename):
-    return send_from_directory(os.path.join('static','uploads', kategori), filename, as_attachment=True)
+    return send_from_directory(os.path.join('uploads', kategori), filename, as_attachment=True)
 
 @app.route('/sil/<kategori>/<filename>')
 def sil_dosya(kategori, filename):
     if 'role' in session and session['role'] == 'admin':
-        path = os.path.join('static','uploads', kategori, filename)
+        path = os.path.join('uploads', kategori, filename)
         if os.path.exists(path):
             os.remove(path)
             flash('Dosya silindi!', 'success')
