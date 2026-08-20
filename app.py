@@ -492,4 +492,9 @@ def serve_sitemap():
     # Klasördeki gerçek sitemap.xml dosyasını tarayıcıya yansıtır
     return send_from_directory(app.root_path, 'sitemap.xml', mimetype='text/xml')
 
+# === Robots.txt İzin Yönlendirmesi ===
+@app.route('/robots.txt')
+def serve_robots_txt():
+    return send_from_directory(app.root_path, 'robots.txt', mimetype='text/plain')
+
 
