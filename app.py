@@ -293,11 +293,11 @@ def projeler():
 
     arduino_files = os.listdir(os.path.join(UPLOAD_FOLDER, "arduino"))
     altium_files = os.listdir(os.path.join(UPLOAD_FOLDER, "altium"))
-    bio_files = os.listdir(os.path.join(UPLOAD_FOLDER, "biyomedikal"))
+    matlab_files = os.listdir(os.path.join(UPLOAD_FOLDER, "Matlab"))
     return render_template("projeler.html",
                            arduino=arduino_files,
                            altium=altium_files,
-                           biyomedikal=bio_files)
+                           matlab=matlab_files)
 
 
 @app.route('/projeler/<kategori>', methods=['GET', 'POST'])
